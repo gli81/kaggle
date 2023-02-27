@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
 
+"""
+LEARNING FROM
+https://www.kaggle.com/code/startupsci/titanic-data-science-solutions
+"""
+
+
 import numpy as np
 import pandas as pd
 import os
@@ -94,6 +100,18 @@ grid = sns.FacetGrid(train_data, col="Embarked")
 grid.map(sns.pointplot,
         "Pclass", "Survived", "Sex",
         palette="deep"
+)
+grid.add_legend()
+plt.show()
+"""
+## CORRELATE CATEGORICAL FEATURES AND NUMERIC FEATURES
+## 个人觉得这图没什么用
+"""
+grid = sns.FacetGrid(train_data,
+                    row="Embarked", col="Survived")
+grid.map(sns.barplot,
+        "Sex", "Fare",
+        # palette="deep"
 )
 grid.add_legend()
 plt.show()
