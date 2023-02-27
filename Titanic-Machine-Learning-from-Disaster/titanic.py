@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import numpy as np
 import pandas as pd
 import os
@@ -63,11 +62,42 @@ print(train_data[["Sex", "Survived"]]
         .groupby("Sex")
         .mean()
         .sort_values(by="Survived", ascending=False))
+print(train_data[["SibSp", "Survived"]]
+        .groupby("SibSp")
+        .mean()
+        .sort_values(by="Survived", ascending=False))
+print(train_data[["Parch", "Survived"]]
+        .groupby("Parch")
+        .mean()
+        .sort_values(by="Survived", ascending=False))
 
 
-
-
-import random
 import seaborn as sns
 import matplotlib.pyplot as plt
+
+"""
+## VISUALIZING NUMERICAL VARIABLE (Age)
+"""
+g = sns.FacetGrid(train_data, col="Survived")
+g.map(plt.hist, "Age", bins=20)
+plt.show()
+"""
+## VISUALIZING ORDINAL VARIABLE (Pclass)
+"""
+grid = sns.FacetGrid(train_data, col="Survived", row="Pclass")
+grid.map(plt.hist, "Age", bins=20)
+plt.show()
+"""
+## VISUALIZING CATEGORICAL VARIABLE (Embarked)
+"""
+grid = sns.FacetGrid(train_data, col="Embarked")
+grid.map(sns.pointplot,
+        "Pclass", "Survived", "Sex",
+        palette="deep"
+)
+grid.add_legend()
+plt.show()
+
+import random
+
 from sklearn.linear_model import LogisticRegression
