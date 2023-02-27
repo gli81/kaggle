@@ -116,6 +116,32 @@ grid.map(sns.barplot,
 grid.add_legend()
 plt.show()
 
+
+"""
+## DROP SOME VARIABLES (Ticket, Cabin)
+messy data, and not really useful
+"""
+train_data = train_data.drop(['Ticket', 'Cabin'], axis=1)
+test_data = test_data.drop(['Ticket', 'Cabin'], axis=1)
+combined = [train_data, test_data]
+
+
+"""
+## CREATE NEW FEATURE
+extract title from name
+"""
+for dataset in combined:
+    dataset["Title"] = dataset["Name"].str.extract(
+        '([A-Za-z]+)\.', expand=False
+    )
+print(pd.crosstab(train_data["Title"], train_data["Sex"]))
+
+
+
+
+
+
+
 import random
 
 from sklearn.linear_model import LogisticRegression
